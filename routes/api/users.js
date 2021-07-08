@@ -15,13 +15,12 @@ const User = require("../../models/User");
  * Register a new user
  * @POST /register
  * @body username (string)
- * @body email (valid email string)
  * @body password (string)
  */
 
 router.post("/register", async (req, res) => {
   // Deconstruct request
-  const { username, email, password } = req.body;
+  const { username, password } = req.body;
 
   // Track errors
   let errMessage;
@@ -42,7 +41,7 @@ router.post("/register", async (req, res) => {
 
     // Insert newly created user
     errMessage = "Failed to register user in database";
-    await new User({ username, email, password: hashedPassword }).save();
+    await new User({ username, password: hashedPassword }).save();
 
     // Success
     res
