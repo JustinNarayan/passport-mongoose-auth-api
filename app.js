@@ -1,10 +1,16 @@
 /// Enable server
 const express = require("express");
 const mongoose = require("mongoose");
+const passport = require("passport");
 
 // App and middleware
 const app = express();
 app.use(express.json());
+
+// Passport config
+require("./config/passport")(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Connect to MongoDB
 const db = require("./config/keys").mongoURI;

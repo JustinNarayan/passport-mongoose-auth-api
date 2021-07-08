@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const passport = require("passport");
 let keys;
 try {
   keys = require("../../config/keys");
@@ -51,6 +52,20 @@ router.post("/register", async (req, res) => {
     // Send error message to front end
     res.send({ message: errMessage, type: "failure", err });
   }
+});
+
+/**
+ * Logs in a user
+ * @POST /login
+ * @body username (string)
+ * @body password (string)
+ */
+
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", {
+    successRedirect: "/success ",
+    failureRedirect: "/failure",
+  })(req, res, next);
 });
 
 module.exports = router;
