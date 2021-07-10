@@ -2,15 +2,26 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const path = require("path");
 let keys;
 try {
-  keys = require("../../config/keys");
+  keys = require("../config/keys");
 } catch (err) {
   // module doesn't exist in production, use environmental variables
 }
 
 // Load User model
-const User = require("../../models/User");
+const User = require("../models/User");
+
+// Login
+router.get("/login", (req, res) => {
+  res.send({ text: "This is the login page" });
+});
+
+// Register
+router.get("/register", (req, res) => {
+  res.send({ text: "This is the register page" });
+});
 
 /**
  * Register a new user
@@ -62,10 +73,36 @@ router.post("/register", async (req, res) => {
  */
 
 router.post("/login", (req, res, next) => {
-  passport.authenticate("local", {
-    successRedirect: "/success ",
-    failureRedirect: "/failure",
+  passport.authenticate("local", (err, user) => {
+    try {
+      if (err) throw err;
+      if (!user)
+        res.send({ message: "Invalid login credentials", type: "failure" });
+      else {
+        req.logIn(user, (err) => {
+          if (err) throw err;
+          return res.send({
+            message: "Successfully logged in",
+            type: "success",
+          });
+        });
+      }
+    } catch (err) {
+      res.send({ message: "Failed to log in", type: "failure", err });
+    }
   })(req, res, next);
+});
+
+/**
+ * Logs out a user
+ * @GET /logout
+ */
+
+router.get("/logout", (req, res) => {
+  res.send({
+    messages: "Successfully logged out",
+    type: "success",
+  });
 });
 
 module.exports = router;

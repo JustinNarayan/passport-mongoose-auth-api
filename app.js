@@ -2,10 +2,20 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const session = require("express-session");
 
 // App and middleware
 const app = express();
 app.use(express.json());
+
+// Express session
+app.use(
+  session({
+    secret: require("./config/keys").sessionSecret,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 
 // Passport config
 require("./config/passport")(passport);
@@ -20,7 +30,8 @@ mongoose
   .catch((err) => console.log(err));
 
 // Routes
-app.use("/users", require("./routes/api/users.js"));
+app.use("/", require("./routes/index.js"));
+app.use("/users", require("./routes/users.js"));
 
 // Run server
 const port = process.env.PORT || 5000;
