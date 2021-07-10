@@ -1,7 +1,6 @@
 /// This route setup is for a very basic demo site NOT implementing a framework or template engine
 const express = require("express");
 const router = express.Router();
-const path = require("path");
 const { ensureAuthenticated } = require("../config/auth");
 
 // Welcome
