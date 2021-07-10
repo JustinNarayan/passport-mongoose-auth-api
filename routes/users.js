@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const passport = require("passport");
-const path = require("path");
 let keys;
 try {
   keys = require("../config/keys");
@@ -56,9 +55,10 @@ router.post("/register", async (req, res) => {
     await new User({ username, password: hashedPassword }).save();
 
     // Success
-    res
-      .status(201)
-      .send({ message: "User successfully registered", type: "success" });
+    res.status(201).send({
+      message: "User successfully registered - SHOULD REDIRECT TO LOGIN",
+      type: "success",
+    });
   } catch (err) {
     // Send error message to front end
     res.send({ message: errMessage, type: "failure", err });
@@ -82,7 +82,7 @@ router.post("/login", (req, res, next) => {
         req.logIn(user, (err) => {
           if (err) throw err;
           return res.send({
-            message: "Successfully logged in",
+            message: "Successfully logged in - SHOULD REDIRECT TO DASHBOARD",
             type: "success",
           });
         });
@@ -100,7 +100,7 @@ router.post("/login", (req, res, next) => {
 
 router.get("/logout", (req, res) => {
   res.send({
-    messages: "Successfully logged out",
+    messages: "Successfully logged out - SHOULD REDIRECT TO LOGIN",
     type: "success",
   });
 });
