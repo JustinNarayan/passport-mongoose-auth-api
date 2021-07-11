@@ -22,6 +22,11 @@ router.get("/register", (req, res) => {
   res.send({ text: "This is the register page" });
 });
 
+// Current User
+router.get("/current", (req, res) => {
+  res.send(req.user);
+});
+
 /**
  * Register a new user
  * @POST /register
@@ -99,6 +104,7 @@ router.post("/login", (req, res, next) => {
  */
 
 router.get("/logout", (req, res) => {
+  req.logout();
   res.send({
     messages: "Successfully logged out - SHOULD REDIRECT TO LOGIN",
     type: "success",

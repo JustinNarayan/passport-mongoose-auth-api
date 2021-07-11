@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 
 // Dashboard
 router.get("/dashboard", ensureAuthenticated, (req, res) => {
-  res.send({ text: "This is the dashboard page", user: req.user });
+  res.send({ text: "This is the dashboard page" });
 });
 
 module.exports = router;
