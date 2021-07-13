@@ -1,32 +1,34 @@
 {
-  "name": "mern-task-list",
-  "version": "1.0.0",
-  "description": "README testing",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jnarayanbvg/mern-task-list.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jnarayanbvg/mern-task-list/issues"
-  },
-  "homepage": "https://github.com/jnarayanbvg/mern-task-list#readme",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "express-session": "^1.17.2",
-    "mongoose": "^5.13.2",
-    "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.9"
-  }
+	"name": "mern-task-list",
+	"version": "1.0.0",
+	"description": "README testing",
+	"main": "app.js",
+	"scripts": {
+		"server": "nodemon app.js",
+      "client": "npm start --prefix client",
+		"dev": "concurrently \"npm run server\" \"npm run client\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jnarayanbvg/mern-task-list.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jnarayanbvg/mern-task-list/issues"
+	},
+	"homepage": "https://github.com/jnarayanbvg/mern-task-list#readme",
+	"dependencies": {
+		"bcrypt": "^5.0.1",
+		"body-parser": "^1.19.0",
+		"concurrently": "^6.2.0",
+		"express": "^4.17.1",
+		"express-session": "^1.17.2",
+		"mongoose": "^5.13.2",
+		"passport": "^0.4.1",
+		"passport-local": "^1.0.0"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.12"
+	}
 }

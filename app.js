@@ -10,11 +10,11 @@ app.use(express.json());
 
 // Express session
 app.use(
-  session({
-    secret: require("./config/keys").sessionSecret,
-    resave: true,
-    saveUninitialized: true,
-  })
+	session({
+		secret: require("./config/keys").sessionSecret,
+		resave: true,
+		saveUninitialized: true,
+	})
 );
 
 // Passport config
@@ -25,12 +25,11 @@ app.use(passport.session());
 // Connect to MongoDB
 const db = require("./config/keys").mongoURI;
 mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.log(err));
+	.connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+	.then(() => console.log("MongoDB Connected"))
+	.catch((err) => console.log(err));
 
 // Routes
-app.use("/", require("./routes/index.js"));
 app.use("/users", require("./routes/users.js"));
 
 // Run server
